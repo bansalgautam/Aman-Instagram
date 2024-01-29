@@ -22,7 +22,8 @@ function Signup() {
           body: JSON.stringify({ name, email, password }),
         }
       );
-      console.log(result);
+      const res = await result.json();
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
