@@ -11,11 +11,17 @@ function Signup() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const result = await axiosClient.post("/auth/signup", {
-        name,
-        email,
-        password,
-      });
+      const result = await fetch(
+        "https://insta-backend-wc4u.onrender.com/auth/signup",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, password }),
+        }
+      );
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -62,9 +68,9 @@ function Signup() {
         </div>
 
         <p className="subheading">
-          Already have an Account? 
+          Already have an Account?
           <span>
-          <Link to="/login">Log In</Link>
+            <Link to="/login">Log In</Link>
           </span>
         </p>
       </div>
