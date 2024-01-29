@@ -8,7 +8,7 @@ const commentRouter = require("./Routers/commentRouter");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const cloudinary=require("cloudinary").v2;
+const cloudinary = require("cloudinary").v2;
 
 dotenv.config({ path: "./.env" });
 
@@ -20,34 +20,34 @@ cloudinary.config({
 });
 
 const app = express();
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4000;
 
 // --------------------------MIDDLEWARE---------------------------------
-app.use(express.json({limit:'50mb'}));
+app.use(express.json({ limit: "50mb" }));
 app.use(morgan("common"));
 app.use(cookieParser());
 
 // ---------- CORS -------------------
-let origin = 'http://localhost:4000/';
-console.log('here env', process.env.NODE_ENV);
-if(process.env.NODE_ENV==="production"){
+let origin = "http://localhost:3000/";
+console.log("here env", process.env.NODE_ENV);
+if (process.env.NODE_ENV === "production") {
   origin = process.env.CORS_ORIGIN;
 }
 app.use(
   cors({
-    credentials: true,
-    methods:["POST","GET"],
-    origin,
+    origin: "",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
   })
 );
 
 app.use("/auth", authRouter);
 app.use("/posts", postRouter);
 app.use("/user", usersRouter);
-app.use("/comment",commentRouter);
+app.use("/comment", commentRouter);
 
 app.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin","true");
+  res.setHeader("Access-Control-Allow-Origin", "true");
   res.status(200).send("Ok from server");
 });
 
