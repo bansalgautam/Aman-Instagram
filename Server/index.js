@@ -28,13 +28,13 @@ app.use(morgan("common"));
 app.use(cookieParser());
 
 // ---------- CORS ---------------------
-app.use(
-  cors({
-    origin: "https://aman-instagram.vercel.app/",
-    credentials: true, //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
-  })
-);
+const corsOptions = {
+  origin: "*", // or a specific origin like 'http://example.com'
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
 
 app.use("/auth", authRouter);
 app.use("/posts", postRouter);
