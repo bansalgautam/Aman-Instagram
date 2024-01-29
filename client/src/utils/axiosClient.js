@@ -10,8 +10,8 @@ import {
 import { setLoading, showToast } from "../redux/slices/appConfigslice";
 import { TOAST_FAILURE } from "../App";
 
-let baseURL = 'http://localhost:4000/';
-if(process.env.NODE_ENV==="production"){
+let baseURL = "https://insta-backend-wc4u.onrender.com/";
+if (process.env.NODE_ENV === "production") {
   baseURL = process.env.REACT_APP_SERVER_URL;
 }
 export const axiosClient = axios.create({
@@ -32,7 +32,7 @@ axiosClient.interceptors.request.use((request) => {
 // -------------------------RESPONSE INTERCEPTORS----------------
 axiosClient.interceptors.response.use(
   async (response) => {
-    store.dispatch(setLoading(false))
+    store.dispatch(setLoading(false));
     const data = response.data;
     if (data.status === "ok") {
       return data;

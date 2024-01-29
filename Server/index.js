@@ -27,15 +27,10 @@ app.use(express.json({ limit: "50mb" }));
 app.use(morgan("common"));
 app.use(cookieParser());
 
-// ---------- CORS -------------------
-let origin = "http://localhost:3000/";
-console.log("here env", process.env.NODE_ENV);
-if (process.env.NODE_ENV === "production") {
-  origin = process.env.CORS_ORIGIN;
-}
+// ---------- CORS ---------------------
 app.use(
   cors({
-    origin: "",
+    origin: "https://aman-instagram.vercel.app/",
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
   })
