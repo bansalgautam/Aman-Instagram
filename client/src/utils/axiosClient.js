@@ -24,7 +24,6 @@ export const axiosClient = axios.create({
 axiosClient.interceptors.request.use((request) => {
   const accessToken = getItem(KEY_ACCESS_TOKEN);
   request.headers["Authorization"] = `Bearer ${accessToken}`;
-  request.headers["Access-Control-Allow-Origin"] = "*";
   store.dispatch(setLoading(true));
 
   return request;
