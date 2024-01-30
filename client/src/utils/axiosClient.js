@@ -11,9 +11,9 @@ import { setLoading, showToast } from "../redux/slices/appConfigslice";
 import { TOAST_FAILURE } from "../App";
 
 let baseURL = "https://insta-backend-wc4u.onrender.com/";
-if (process.env.NODE_ENV === "production") {
-  baseURL = process.env.REACT_APP_SERVER_URL;
-}
+// if (process.env.NODE_ENV === "production") {
+//   baseURL = process.env.REACT_APP_SERVER_URL;
+// }
 export const axiosClient = axios.create({
   baseURL,
   withCredentials: true,
@@ -24,6 +24,7 @@ export const axiosClient = axios.create({
 axiosClient.interceptors.request.use((request) => {
   const accessToken = getItem(KEY_ACCESS_TOKEN);
   request.headers["Authorization"] = `Bearer ${accessToken}`;
+  request.headers["Access-Control-Allow-Origin"] = "*";
   store.dispatch(setLoading(true));
 
   return request;
